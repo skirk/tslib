@@ -8,8 +8,8 @@
 #
 #
 
-AM_CFLAGS		= -DTS_POINTERCAL=\"@TS_POINTERCAL@\" $(DEBUGFLAGS) $(LIBFLAGS) $(VIS_CFLAGS)
-LDADD			= -rpath $(PLUGIN_DIR)
+AM_CFLAGS		= -DTS_POINTERCAL=\"@TS_POINTERCAL@\" $(DEBUGFLAGS) $(LIBFLAGS) $(VIS_CFLAGS) $(LIBEVDEV_CFLAGS)
+LDADD			= -rpath $(PLUGIN_DIR) $(LIBEVDEV_LIBS)
 AM_CPPFLAGS		= -I$(top_srcdir)/src
   
 #LTVSN			= -version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE)
@@ -309,7 +309,7 @@ dmc_dus3000_la_LDFLAGS	= -module $(LTVSN)
 
 input_la_SOURCES	= input-raw.c
 input_la_LDFLAGS	= -module $(LTVSN)
-input_la_LIBADD		= $(top_builddir)/src/libts.la
+input_la_LIBADD		= $(top_builddir)/src/libts.la $(LIBEVDEV_LIBS)
 
 galax_la_SOURCES = galax-raw.c
 galax_la_LDFLAGS = -module $(LTVSN)
