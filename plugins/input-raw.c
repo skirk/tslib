@@ -416,7 +416,10 @@ static int ts_input_read(struct tslib_module_info *inf,
 			printf("INPUT-RAW: normal event read\n");
 		#endif
 		} else if (rc == -EAGAIN) {
-			return rc;
+			if (total > 0)
+				return total;
+			else
+				return rc;
 		} else {
 			fprintf(stderr, "Failed to handle events: %s\n",
 				strerror(-rc));
@@ -621,14 +624,18 @@ static int ts_input_read_mt(struct tslib_module_info *inf,
 			printf("INPUT-RAW: normal event read\n");
 		#endif
 		} else if (rc == -EAGAIN) {
-			return rc;
+			if (total > 0)
+				return total;
+			else
+				return rc;
 		} else {
 			fprintf(stderr, "Failed to handle events: %s\n",
 				strerror(-rc));
 		}
 
 	#ifdef DEBUG
-		printf("INPUT-RAW: read type %d  code %3d  value %4d  time %ld.%ld\n",
+		printf("INPUT-RAW nr %d: read type %d  code %3d  value %4d  time %ld.%ld\n",
+		       total,
 		       ev.type, ev.code,
 		       ev.value, (long)ev.time.tv_sec,
 		       (long)ev.time.tv_usec);
