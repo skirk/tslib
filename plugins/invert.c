@@ -63,9 +63,6 @@ static int invert_read_mt(struct tslib_module_info *info,
 		return ret;
 
 #ifdef DEBUG
-	if (ret == 0)
-		fprintf(stderr, "INVERT: couldn't read data\n");
-
 	printf("INVERT: read %d samples (mem: %d nr x %d slots)\n",
 		ret, nr, max_slots);
 #endif

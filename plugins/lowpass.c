@@ -98,9 +98,6 @@ static int lowpass_read_mt(struct tslib_module_info *info,
 		return ret;
 
 #ifdef DEBUG
-	if (ret == 0)
-		fprintf(stderr, "LOWPASS: couldn't read data\n");
-
 	printf("LOWPASS: read %d samples (mem: %d nr x %d slots)\n",
 		ret, nr, max_slots);
 #endif

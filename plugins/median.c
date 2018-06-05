@@ -210,9 +210,6 @@ static int median_read_mt(struct tslib_module_info *inf,
 		return ret;
 
 #ifdef DEBUG
-	if (ret == 0)
-		fprintf(stderr, "MEDIAN: couldn't read data\n");
-
 	printf("MEDIAN:   read %d samples (mem: %d nr x %d slots)\n",
 	       ret, nr, max_slots);
 #endif

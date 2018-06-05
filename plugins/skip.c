@@ -122,7 +122,8 @@ static int skip_read(struct tslib_module_info *info, struct ts_sample *samp,
 		samp[nread++] = skip->buf[skip->M];
 
 #ifdef DEBUG
-		fprintf(stderr, "SKIP---> (X:%d Y:%d) pressure:%d\n",
+		fprintf(stderr, "SKIP nr %d ---> (X:%d Y:%d) pressure:%d\n",
+			nread,
 			skip->buf[skip->M].x, skip->buf[skip->M].y,
 			skip->buf[skip->M].pressure);
 #endif
