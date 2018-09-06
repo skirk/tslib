@@ -242,7 +242,7 @@ static const struct tslib_vars iir_vars[] = {
 
 #define NR_VARS (sizeof(iir_vars) / sizeof(iir_vars[0]))
 
-TSAPI struct tslib_module_info *iir_mod_init(__attribute__ ((unused)) struct tsdev *dev,
+TSAPI struct tslib_module_info *iir_mod_init(ATTR_UNUSED struct tsdev *dev,
 					     const char *params)
 {
 	struct tslib_iir *iir;

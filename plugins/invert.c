@@ -141,7 +141,7 @@ static const struct tslib_vars invert_vars[] = {
 
 #define NR_VARS (sizeof(invert_vars) / sizeof(invert_vars[0]))
 
-TSAPI struct tslib_module_info *invert_mod_init(__attribute__ ((unused)) struct tsdev *dev,
+TSAPI struct tslib_module_info *invert_mod_init(ATTR_UNUSED struct tsdev *dev,
 						const char *params)
 {
 	struct tslib_invert *ctx;

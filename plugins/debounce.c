@@ -59,7 +59,7 @@ static int debounce_read(struct tslib_module_info *info, struct ts_sample *samp,
 	long dt;
 	int drop = 0;
 	int left;
-	__attribute__ ((unused)) enum debounce_mode mode;
+	ATTR_UNUSED enum debounce_mode mode;
 
 	ret = info->next->ops->read(info->next, samp, nr);
 	if (ret < 0)
@@ -244,7 +244,7 @@ static const struct tslib_vars debounce_vars[] = {
 
 #define NR_VARS (sizeof(debounce_vars) / sizeof(debounce_vars[0]))
 
-TSAPI struct tslib_module_info *debounce_mod_init(__attribute__ ((unused)) struct tsdev *dev,
+TSAPI struct tslib_module_info *debounce_mod_init(ATTR_UNUSED struct tsdev *dev,
 						  const char *params)
 {
 	struct tslib_debounce *p;

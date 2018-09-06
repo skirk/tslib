@@ -131,7 +131,7 @@ static const struct tslib_ops dmc_ops = {
 };
 
 TSAPI struct tslib_module_info *dmc_mod_init(struct tsdev *dev,
-					     __attribute__ ((unused)) const char *params)
+					     ATTR_UNUSED const char *params)
 {
 	struct tslib_dmc *m;
 

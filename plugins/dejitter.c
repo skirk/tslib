@@ -360,7 +360,7 @@ static const struct tslib_vars dejitter_vars[] = {
 
 #define NR_VARS (sizeof(dejitter_vars) / sizeof(dejitter_vars[0]))
 
-TSAPI struct tslib_module_info *dejitter_mod_init(__attribute__ ((unused)) struct tsdev *dev,
+TSAPI struct tslib_module_info *dejitter_mod_init(ATTR_UNUSED struct tsdev *dev,
 						  const char *params)
 {
 	struct tslib_dejitter *djt;

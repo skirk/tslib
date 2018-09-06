@@ -91,8 +91,8 @@ static const struct tslib_ops misc_ops =
         .fini   	= ts_fini,
 };
 
-TSAPI struct tslib_module_info *one_wire_ts_input_mod_init(__attribute__ ((unused)) struct tsdev *dev,
-							   __attribute__ ((unused)) const char *params)
+TSAPI struct tslib_module_info *one_wire_ts_input_mod_init(ATTR_UNUSED struct tsdev *dev,
+							   ATTR_UNUSED const char *params)
 {
 	struct tslib_module_info *m;
 

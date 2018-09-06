@@ -257,7 +257,7 @@ static const struct tslib_vars lowpass_vars[] = {
 
 #define NR_VARS (sizeof(lowpass_vars) / sizeof(lowpass_vars[0]))
 
-TSAPI struct tslib_module_info *lowpass_mod_init(__attribute__ ((unused)) struct tsdev *dev,
+TSAPI struct tslib_module_info *lowpass_mod_init(ATTR_UNUSED struct tsdev *dev,
 						 const char *params)
 {
 	struct tslib_lowpass *var;

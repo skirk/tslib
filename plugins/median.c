@@ -11,7 +11,7 @@
  * SPDX-License-Identifier: LGPL-2.1
  *
  *
- * Median filter incoming data. For some theory, see
+ * Median filter incomming data. For some theory, see
  * https://en.wikipedia.org/wiki/Median_filter
  */
 
@@ -71,9 +71,9 @@ static int comp_uint(const void *n1, const void *n2)
 	return  *i1 < *i2 ? -1 : 1;
 }
 
-static void printsamples(__attribute__ ((unused)) char *prefix,
-			 __attribute__ ((unused)) int *samples,
-			 __attribute__ ((unused)) size_t count)
+static void printsamples(ATTR_UNUSED char *prefix,
+			 ATTR_UNUSED int *samples,
+			 ATTR_UNUSED size_t count)
 {
 #ifdef DEBUG
 	size_t j;
@@ -86,10 +86,10 @@ static void printsamples(__attribute__ ((unused)) char *prefix,
 #endif
 }
 
-static void printsamples_mt(__attribute__ ((unused)) char *prefix,
-			    __attribute__ ((unused)) int *samples,
-			    __attribute__ ((unused)) size_t count,
-			    __attribute__ ((unused)) int slot)
+static void printsamples_mt(ATTR_UNUSED char *prefix,
+			    ATTR_UNUSED int *samples,
+			    ATTR_UNUSED size_t count,
+			    ATTR_UNUSED int slot)
 {
 #ifdef DEBUG
 	size_t j;
@@ -102,8 +102,8 @@ static void printsamples_mt(__attribute__ ((unused)) char *prefix,
 #endif
 }
 
-static void printsample(__attribute__ ((unused)) char *prefix,
-			__attribute__ ((unused)) struct ts_sample *s)
+static void printsample(ATTR_UNUSED char *prefix,
+			ATTR_UNUSED struct ts_sample *s)
 {
 #ifdef DEBUG
 	printf("%s using Point at (%d,%d) with pressure %u\n",
@@ -111,8 +111,8 @@ static void printsample(__attribute__ ((unused)) char *prefix,
 #endif
 }
 
-static void printsample_mt(__attribute__ ((unused)) char *prefix,
-			   __attribute__ ((unused)) struct ts_sample_mt *s)
+static void printsample_mt(ATTR_UNUSED char *prefix,
+			   ATTR_UNUSED struct ts_sample_mt *s)
 {
 #ifdef DEBUG
 	printf("%s (slot %d) using Point at (%d,%d) with pressure %u\n",
@@ -171,7 +171,7 @@ static int median_read(struct tslib_module_info *inf, struct ts_sample *samp,
 
 			if ((cpress == 0)  && (c->withsamples != 0)) {
 				/* We have penup. Flush the line we now must
-				 * wait for c->size / 2 samples until we get
+				 * wait for c->size / 2 samples untill we get
 				 * valid data again
 				 */
 				memset(c->delay,
@@ -299,7 +299,7 @@ static int median_read_mt(struct tslib_module_info *inf,
 
 			if ((cpress == 0) && (c->withsamples_mt[j] != 0)) {
 				/* We have penup. Flush the line we now must
-				 * wait for c->size / 2 samples until we get
+				 * wait for c->size / 2 samples untill we get
 				 * valid data again
 				 */
 				memset(c->delay_mt[j],
@@ -363,7 +363,7 @@ static const struct tslib_ops median_ops = {
 };
 
 static int median_depth(struct tslib_module_info *inf, char *str,
-			__attribute__ ((unused)) void *data)
+			ATTR_UNUSED void *data)
 {
 	struct median_context *m = (struct median_context *)inf;
 	unsigned long v;
@@ -398,7 +398,7 @@ static const struct tslib_vars median_vars[] = {
 
 #define NR_VARS (sizeof(median_vars) / sizeof(median_vars[0]))
 
-TSAPI struct tslib_module_info *median_mod_init(__attribute__ ((unused)) struct tsdev *dev,
+TSAPI struct tslib_module_info *median_mod_init(ATTR_UNUSED struct tsdev *dev,
 						const char *params)
 {
 	struct median_context *c;

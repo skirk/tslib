@@ -108,8 +108,8 @@ static const struct tslib_ops linear_h2200_ops = {
 	.fini	= linear_h2200_fini,
 };
 
-TSAPI struct tslib_module_info *linear_h2200_mod_init(__attribute__ ((unused)) struct tsdev *dev,
-						      __attribute__ ((unused)) const char *params)
+TSAPI struct tslib_module_info *linear_h2200_mod_init(ATTR_UNUSED struct tsdev *dev,
+						      ATTR_UNUSED const char *params)
 {
 
 	struct tslib_linear_h2200 *lin;
