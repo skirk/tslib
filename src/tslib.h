@@ -37,18 +37,21 @@ extern "C" {
 
   #define strcasecmp _stricmp
 
+#ifdef STATIC_TSLIB
   #define TSIMPORT 
-  #define TSEXPORT
-  #define TSLOCAL
+  #define TSEXPORT 
+#else
+  #define TSIMPORT __declspec(dllimport)
+  #define TSEXPORT __declspec(dllexport)
+#endif
+
 #else
   #include <sys/time.h>
   #define TSIMPORT
   #ifdef GCC_HASCLASSVISIBILITY
     #define TSEXPORT __attribute__ ((visibility("default")))
-    #define TSLOCAL __attribute__ ((visibility("hidden")))
   #else
     #define TSEXPORT
-    #define TSLOCAL
   #endif
 #endif
 

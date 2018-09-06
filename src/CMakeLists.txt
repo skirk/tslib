@@ -50,9 +50,8 @@ set_target_properties(tslib PROPERTIES VERSION ${LIBTS_MAJOR}.${LIBTS_VERSION_AG
 
 if (WIN32)
 	target_compile_definitions(tslib PRIVATE _CRT_SECURE_NO_WARNINGS)
-
 	if (NOT ${BUILD_SHARED_LIBS})
-		target_compile_definitions(tslib PRIVATE -DSTATIC_TSLIB)
+		target_compile_definitions(tslib PUBLIC STATIC_TSLIB)
 	endif()
 endif (WIN32)
 
@@ -61,6 +60,7 @@ target_compile_definitions(tslib PUBLIC
 				TS_POINTERCAL="${TS_POINTERCAL}"
 				PLUGIN_DIR="${PLUGIN_DIR}"
 				$<BUILD_INTERFACE:TSLIB_INTERNAL>)
+
 target_link_libraries(tslib ${CMAKE_DL_LIBS})
 
 target_include_directories(tslib PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR};${CMAKE_CURRENT_SOURCE_DIR}>"
