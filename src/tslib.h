@@ -30,13 +30,18 @@
 extern "C" {
 #endif /* __cplusplus */
 #include <stdarg.h>
-#include <sys/time.h>
 
 #ifdef WIN32
+  #include <time.h>
+  #include <winsock.h>
+
+  #define strcasecmp _stricmp
+
   #define TSIMPORT __declspec(dllimport)
   #define TSEXPORT __declspec(dllexport)
   #define TSLOCAL
 #else
+  #include <sys/time.h>
   #define TSIMPORT
   #ifdef GCC_HASCLASSVISIBILITY
     #define TSEXPORT __attribute__ ((visibility("default")))
@@ -52,6 +57,13 @@ extern "C" {
 #else
   #define TSAPI TSIMPORT
 #endif /* TSLIB_INTERNAL */
+
+
+#ifdef __GNUC__
+#define ATTR_UNUSED __attribute__((unused))
+#else
+#define ATTR_UNUSED
+#endif
 
 struct tsdev;
 
