@@ -88,8 +88,18 @@ static int ts_mswin_input_read_mt(struct tslib_module_info *inf,
 
 			samp[0][k].x = i->buf[j].x;
 			samp[0][k].y = i->buf[j].y;
+			samp[0][k].valid |= TSLIB_MT_VALID;
+			samp[0][k].tracking_id = i->buf[j].dwID;
 			samp[0][k].tv.tv_usec = i->buf[j].dwTime * 1000;
 			samp[0][k].tv.tv_sec = i->buf[j].dwTime / 1000;
+			k++;
+		}
+		else if (i->buf[j].dwFlags & TOUCHEVENTF_UP)
+		{
+			samp[0][k].x = i->buf[j].x;
+			samp[0][k].y = i->buf[j].y;
+			samp[0][k].valid |= TSLIB_MT_VALID;
+			samp[0][k].tracking_id = -1;
 			k++;
 		}
 	}
