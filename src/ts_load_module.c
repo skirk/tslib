@@ -114,6 +114,9 @@ static const struct tslib_module_desc tslib_modules[] = {
 #ifdef TSLIB_STATIC_WAVESHARE_MODULE
 	{ "waveshare", waveshare_mod_init },
 #endif
+#ifdef TSLIB_STATIC_WMTOUCH_MODULE
+	{ "wmtouch", wmtouch_mod_init },
+#endif
 #if defined (WIN32)
 	{NULL, NULL}
 #endif
