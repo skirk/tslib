@@ -156,6 +156,9 @@ LRESULT CALLBACK tslibWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 	BOOL handled = FALSE;
 	int done = 0;
 
+	// reset stuff 
+	memset(i->buf, 0, i->max_slots * sizeof(TOUCHINPUT));
+
 	if (!done) {
 
 		switch (uMsg) {
