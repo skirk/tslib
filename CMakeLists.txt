@@ -32,7 +32,11 @@ add_subdirectory(plugins)
 add_subdirectory(tests)
 add_subdirectory(tools)
 add_subdirectory(etc)
-add_subdirectory(doc)
+
+if (UNIX)
+	add_subdirectory(doc)
+endif(UNIX)
+
 
 #create Config files to help other lbiraries to find the package
 include(CMakePackageConfigHelpers)
