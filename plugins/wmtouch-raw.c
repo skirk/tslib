@@ -174,7 +174,7 @@ LRESULT CALLBACK tslibWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 				handled = TRUE;
 			}
 
-			for (ni = i->max_slots; ni < i->max_slots; i++)
+			for (ni; ni < i->max_slots; ni++)
 			{
 				i->buf[ni].dwFlags |= TOUCHEVENTF_UP;
 			}
