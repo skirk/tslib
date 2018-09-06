@@ -21,11 +21,8 @@
 #include <stdint.h>
 
 #include <stdlib.h>
-#ifdef HAVE_UNISTD_H
-# include <unistd.h>
-#endif
-
 #include <time.h>
+
 #include <Windows.h>
 #include <sys/types.h>
 
@@ -186,7 +183,7 @@ LRESULT CALLBACK tslibWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 	return CallWindowProc(i->prevWndProc, hwnd, uMsg, wParam, lParam);
 }
 
-TSAPI struct tslib_module_info *mswin_input_mod_init(ATTR_UNUSED struct tsdev *dev,
+TSAPI struct tslib_module_info *wmtouch_mod_init(ATTR_UNUSED struct tsdev *dev,
 	const char *params)
 {
 
@@ -226,5 +223,5 @@ TSAPI struct tslib_module_info *mswin_input_mod_init(ATTR_UNUSED struct tsdev *d
 }
 
 #ifndef TSLIB_STATIC_MSWIN_INPUT_MODULE
-TSLIB_MODULE_INIT(mswin_input_mod_init);
+TSLIB_MODULE_INIT(wmtouch_mod_init);
 #endif

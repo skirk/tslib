@@ -71,6 +71,10 @@ TSLIB_CHECK_MODULE(cy8mrln-palmpre   OFF "Enable building of cy8mrln-palmpre raw
 TSLIB_CHECK_MODULE(galax             OFF "Enable building of HID USB eGalax raw module (Linux /dev/hiddevN support)" galax-raw.c) 
 TSLIB_CHECK_MODULE(one-wire-ts-input OFF "Enable building of FriendlyARM one-wire raw module" one-wire-ts-input-raw.c)
 
+elseif(MSVC)
+
+TSLIB_CHECK_MODULE(wmtouch			 ON "Enable building of wmtouch module" wmtouch-raw.c)
+
 endif()
 
 #install plugins and add to export set
