@@ -37,8 +37,8 @@ extern "C" {
 
   #define strcasecmp _stricmp
 
-  #define TSIMPORT __declspec(dllimport)
-  #define TSEXPORT __declspec(dllexport)
+  #define TSIMPORT 
+  #define TSEXPORT
   #define TSLOCAL
 #else
   #include <sys/time.h>
