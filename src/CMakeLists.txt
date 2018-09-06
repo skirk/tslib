@@ -48,6 +48,10 @@ set_target_properties(tslib PROPERTIES VERSION ${LIBTS_MAJOR}.${LIBTS_VERSION_AG
 
 if (WIN32)
 	target_compile_definitions(tslib PRIVATE _CRT_SECURE_NO_WARNINGS)
+
+	if (NOT ${BUILD_SHARED_LIBS})
+		target_compile_definitions(tslib PRIVATE -DSTATIC_TSLIB)
+	endif()
 endif (WIN32)
 
 target_compile_definitions(tslib PUBLIC 
