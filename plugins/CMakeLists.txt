@@ -48,6 +48,7 @@ TSLIB_CHECK_MODULE(variance ON "Enable building variance filter" variance.c)
 # hardware access modules  
 #########################
 
+if (NOT MSVC)
 # generic, recommended
 TSLIB_CHECK_MODULE(input             ON "Enable building of generic input raw module (Linux /dev/input/eventN support)" input-raw.c) 
 
@@ -69,6 +70,8 @@ TSLIB_CHECK_MODULE(dmc_dus3000       OFF "Enable building of dmc_dus3000 raw mod
 TSLIB_CHECK_MODULE(cy8mrln-palmpre   OFF "Enable building of cy8mrln-palmpre raw module" cy8mrln-palmpre.c)
 TSLIB_CHECK_MODULE(galax             OFF "Enable building of HID USB eGalax raw module (Linux /dev/hiddevN support)" galax-raw.c) 
 TSLIB_CHECK_MODULE(one-wire-ts-input OFF "Enable building of FriendlyARM one-wire raw module" one-wire-ts-input-raw.c)
+
+endif()
 
 #install plugins and add to export set
 install(TARGETS ${plugin_targets} 
