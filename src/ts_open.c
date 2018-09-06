@@ -107,7 +107,28 @@ struct tsdev *ts_open(const char *name, int nonblock)
 		flags = O_RDONLY;
 	#endif
 		ts->fd = open(name, flags);
+
 	}
+
+
+	#if defined(WIN32) || defined(WIN64)
+	/*
+	* Windows touchscreen API reads touch events from a HWND handle
+	* There ought to be active window at this point to correctly setup tslib
+	*/
+	HWND window = GetActiveWindow();
+	if (window == NULL)
+		goto free;
+
+	ts->fd = window;
+
+
+	BOOL ret = RegisterTouchWindow(window, 0);
+	if (!ret)
+		goto free;
+
+	#endif
+
 	if (ts->fd == -1)
 		goto free;
 
