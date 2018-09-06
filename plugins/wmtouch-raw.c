@@ -82,28 +82,29 @@ static int ts_mswin_input_read_mt(struct tslib_module_info *inf,
 
 	int j = 0, k = 0;
 
-	for (; j < max_slots && j < i->max_slots; j++) {
+	for (; j < i->max_slots; j++) {
 		if (i->buf[j].dwFlags & TOUCHEVENTF_DOWN ||
 			i->buf[j].dwFlags & TOUCHEVENTF_MOVE) {
 
-			samp[0][k].x = i->buf[j].x;
-			samp[0][k].y = i->buf[j].y;
-			samp[0][k].valid |= TSLIB_MT_VALID;
-			samp[0][k].tracking_id = i->buf[j].dwID;
-			samp[0][k].tv.tv_usec = i->buf[j].dwTime * 1000;
-			samp[0][k].tv.tv_sec = i->buf[j].dwTime / 1000;
+			samp[0][j].x = i->buf[j].x;
+			samp[0][j].y = i->buf[j].y;
+			samp[0][j].valid |= TSLIB_MT_VALID;
+			samp[0][j].tracking_id = i->buf[j].dwID;
+			samp[0][j].tv.tv_usec = i->buf[j].dwTime * 1000;
+			samp[0][j].tv.tv_sec = i->buf[j].dwTime / 1000;
 			k++;
 		}
 		else if (i->buf[j].dwFlags & TOUCHEVENTF_UP)
 		{
-			samp[0][k].x = i->buf[j].x;
-			samp[0][k].y = i->buf[j].y;
-			samp[0][k].valid |= TSLIB_MT_VALID;
-			samp[0][k].tracking_id = -1;
+			samp[0][j].x = i->buf[j].x;
+			samp[0][j].y = i->buf[j].y;
+			samp[0][j].valid |= TSLIB_MT_VALID;
+			samp[0][j].tracking_id = -1;
 			k++;
 		}
 	}
-	return k;
+
+	return 1;
 }
 
 static int ts_mswin_input_fini(struct tslib_module_info *inf)
@@ -161,21 +162,11 @@ LRESULT CALLBACK tslibWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 		case WM_TOUCH:
 
 			unsigned int ni = (unsigned int)wParam; // Number of actual per-contact messages
-
-			if (ni > i->max_slots) {
-				free(i->buf);
-				i->buf = malloc(ni * sizeof(TOUCHINPUT));
-
-				if (!i->buf)
-					break; //TODO: proper error handling
-
-				i->max_slots = ni;
-			}
-
-			memset(i->buf, 0, i->max_slots * sizeof(TOUCHINPUT));
-
 			// Unpack message parameters into the array of TOUCHINPUT structures, each
 			// representing a message for one single contact.
+			if (ni > i->max_slots)
+				ni = i->max_slots;
+
 			if (GetTouchInputInfo((HTOUCHINPUT)lParam, ni, i->buf, sizeof(TOUCHINPUT))) {
 				handled = TRUE;
 			}
@@ -211,7 +202,7 @@ TSAPI struct tslib_module_info *wmtouch_mod_init(ATTR_UNUSED struct tsdev *dev,
 	i->slot = 0;
 	i->pen_down = 0;
 	i->buf = NULL;
-	i->max_slots = 0;
+	i->max_slots = 10;
 	i->nr = 0;
 	i->mt = 0;
 	i->no_pressure = 0;
@@ -220,6 +211,8 @@ TSAPI struct tslib_module_info *wmtouch_mod_init(ATTR_UNUSED struct tsdev *dev,
 	i->special_device = 0;
 	i->last_pressure = NULL;
 
+	i->buf = malloc(i->max_slots * sizeof(TOUCHINPUT));
+	memset(i->buf, 0, i->max_slots * sizeof(TOUCHINPUT));
 
 	if (tslib_parse_vars(&i->module, raw_vars, NR_VARS, params)) {
 		free(i);
