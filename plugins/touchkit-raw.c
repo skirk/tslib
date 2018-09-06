@@ -3,7 +3,9 @@
  */
 #include <stdlib.h>
 #include <stdio.h>
+#ifdef HAVE_UNISTD_H
 #include <unistd.h>
+#endif
 #include <termios.h>
 #include <string.h>
 
