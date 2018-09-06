@@ -42,10 +42,11 @@ add_library(tslib ${tslib_core_src})
 
 if (NOT WIN32)
 set_property(TARGET tslib PROPERTY POSITION_INDEPENDENT_CODE ON)
+endif()
+
 math(EXPR LIBTS_MAJOR "${LIBTS_VERSION_CURRENT} - ${LIBTS_VERSION_AGE}")
 set_target_properties(tslib PROPERTIES VERSION ${LIBTS_MAJOR}.${LIBTS_VERSION_AGE}.${LIBTS_VERSION_REVISION}
                                        SOVERSION ${LIBTS_MAJOR} )
-endif()
 
 
 
