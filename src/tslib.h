@@ -36,21 +36,19 @@ extern "C" {
   #include <winsock.h>
 
   #define strcasecmp _stricmp
-#ifdef STATIC_TSLIB
-  #define TSIMPORT 
-  #define TSEXPORT 
-#else
+
   #define TSIMPORT __declspec(dllimport)
   #define TSEXPORT __declspec(dllexport)
-#endif
-
+  #define TSLOCAL
 #else
   #include <sys/time.h>
   #define TSIMPORT
   #ifdef GCC_HASCLASSVISIBILITY
     #define TSEXPORT __attribute__ ((visibility("default")))
+    #define TSLOCAL __attribute__ ((visibility("hidden")))
   #else
     #define TSEXPORT
+    #define TSLOCAL
   #endif
 #endif
 
@@ -61,7 +59,7 @@ extern "C" {
 #endif /* TSLIB_INTERNAL */
 
 
-#ifdef __GNUC__
+#ifdef _GNUC
 #define ATTR_UNUSED __attribute__((unused))
 #else
 #define ATTR_UNUSED
@@ -173,11 +171,6 @@ TSAPI int ts_fd(struct tsdev *);
  * Load a filter/scaling module
  */
 TSAPI int ts_load_module(struct tsdev *, const char *mod, const char *params);
-
-/*
- * Load a raw module
- */
-TSAPI int ts_load_module_raw(struct tsdev *, const char *mod, const char *params);
 
 /*
  * Open the touchscreen device.
