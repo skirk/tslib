@@ -43,3 +43,7 @@ compile
 *.exe
 INSTALL
 
+
+.vs*
+CMakeSettings.json
+*.swp
