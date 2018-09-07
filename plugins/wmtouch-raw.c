@@ -94,7 +94,7 @@ static int ts_mswin_input_read_mt(struct tslib_module_info *inf,
 			samp[0][j].tv.tv_sec = i->buf[j].dwTime / 1000;
 			k++;
 		}
-		else if (i->buf[j].dwFlags & TOUCHEVENTF_UP)
+		else
 		{
 			samp[0][j].x = i->buf[j].x;
 			samp[0][j].y = i->buf[j].y;
