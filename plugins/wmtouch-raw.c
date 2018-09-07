@@ -94,7 +94,7 @@ static int ts_mswin_input_read_mt(struct tslib_module_info *inf,
 			samp[0][j].tv.tv_sec = i->buf[j].dwTime / 1000;
 			k++;
 		}
-		else
+		else if (i->buf[j].dwFlags & TOUCHEVENTF_UP)
 		{
 			samp[0][j].x = i->buf[j].x;
 			samp[0][j].y = i->buf[j].y;
@@ -159,6 +159,11 @@ LRESULT CALLBACK tslibWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 	// reset stuff 
 	memset(i->buf, 0, i->max_slots * sizeof(TOUCHINPUT));
 
+	for (int j; j < i->max_slots; j++)
+	{
+		i->buf[j].dwFlags |= TOUCHEVENTF_UP;
+	}
+
 	if (!done) {
 
 		switch (uMsg) {
@@ -173,12 +178,6 @@ LRESULT CALLBACK tslibWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 			if (GetTouchInputInfo((HTOUCHINPUT)lParam, ni, i->buf, sizeof(TOUCHINPUT))) {
 				handled = TRUE;
 			}
-
-			for (ni; ni < i->max_slots; ni++)
-			{
-				i->buf[ni].dwFlags |= TOUCHEVENTF_UP;
-			}
-
 			break;
 		}
 	}
