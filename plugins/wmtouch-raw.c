@@ -159,7 +159,7 @@ LRESULT CALLBACK tslibWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 	// reset stuff 
 	memset(i->buf, 0, i->max_slots * sizeof(TOUCHINPUT));
 
-	for (int j; j < i->max_slots; j++)
+	for (int j = 0; j < i->max_slots; j++)
 	{
 		i->buf[j].dwFlags |= TOUCHEVENTF_UP;
 	}
